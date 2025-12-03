@@ -10,7 +10,7 @@ class Plat(ABC):
         pass
 
     def description(self) -> str:
-        return f"Plat : {self.nom}, prix de base : {prix_base} €"
+        return f"Plat : {self.nom}, prix de base : {self.prixBase} €"
 
 class PlatChaud(Plat):
     def __init__(self, nom: str, prixBase: float):

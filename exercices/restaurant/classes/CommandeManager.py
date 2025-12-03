@@ -1,3 +1,6 @@
+from .Plat import Plat
+
+
 class CommandeManager:
     _instance = None  # instance unique
     _init_done = False  # empêche la réinitialisation multiple
@@ -16,4 +19,8 @@ class CommandeManager:
 
     def ajouterPlat(self, plat: Plat):
         self._liste.append(plat)
+
+    def printAllPlat(self):
+        for plat in self._liste:
+            print(plat.description())
 

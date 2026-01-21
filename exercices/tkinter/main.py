@@ -1,22 +1,28 @@
 import tkinter as tk
 
 from exercices.tkinter.classes.Page.LogIn import LogIn
-from exercices.tkinter.classes.db.DAO import UserDao
 from exercices.tkinter.classes.db.DbConnection import DbConnection
 
 
-def main():
-    db = DbConnection("app.db")
-    dao = UserDao(db)
-    dao.create_table()
+class Main:
+    def __init__(self):
+        self.root = tk.Tk()
+        DbConnection("resources/db/app.db")
 
-    root = tk.Tk()
-    app = LogIn(root, dao)
+        self.current_page = None
 
-    try:
-        root.mainloop()
-    finally:
-        db.close()
+        self.show_page(LogIn)
+        self.root.mainloop()
 
+    def show_page(self, page_class):
 
-main()
+        if self.current_page is not None:
+            self.current_page.destroy()
+
+        self.current_page = page_class(self.root, self)
+        self.current_page.grid(row=0, column=0, sticky="nsew")
+
+        self.root.columnconfigure(0, weight=1)
+        self.root.rowconfigure(0, weight=1)
+
+Main()

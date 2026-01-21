@@ -5,39 +5,24 @@ from tkinter import messagebox, ttk
 
 import tkinter as tk
 
+from exercices.tkinter.classes.Page.BasePage import BasePage
+
 from exercices.tkinter.classes.db.DAO import UserDao
 
 
-class LogIn:
-    def __init__(self, root: tk.Tk, dao: UserDao):
-        self.root = root
-        self.dao = dao
+class LogIn(BasePage):
+    def __init__(self, parent, controller):
+        self.dao = UserDao()
 
-        self.root.title("Mini Login")
-        self.root.geometry("720x200")
-        self.root.resizable(False, False)
-        self.root.columnconfigure(0, weight=1)
-        self.root.columnconfigure(1, weight=1)
+        parent.title("Login")
+        parent.geometry("500x200")
+        parent.resizable(False, False)
 
-        self.frame_add = tk.LabelFrame(root, text="Ajouter un utilisateur", padx=10, pady=10)
-        self.frame_add.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
-        self.frame_connect = tk.LabelFrame(root, text="Connexion", padx=10, pady=10)
+        super().__init__(parent, controller)
+
+        self.frame_connect = tk.LabelFrame(self.root, text="Connexion", padx=10, pady=10)
         self.frame_connect.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
 
-        # Labels
-        tk.Label(self.frame_add, text="Nom :").grid(row=0, column=0, padx=10, pady=10, sticky="e")
-        tk.Label(self.frame_add, text="Mot de passe :").grid(row=1, column=0, padx=10, pady=10, sticky="e")
-
-        # Entries
-        self.entry_add_nom = tk.Entry(self.frame_add, width=25)
-        self.entry_add_pwd = tk.Entry(self.frame_add, width=25, show="*")
-
-        self.entry_add_nom.grid(row=0, column=1, padx=10, pady=10)
-        self.entry_add_pwd.grid(row=1, column=1, padx=10, pady=10)
-
-        # Buttons
-        btn_add = tk.Button(self.frame_add, text="Add", width=12, command=self.on_add)
-        btn_add.grid(row=2, column=1, padx=10, pady=10)
 
         tk.Label(self.frame_connect, text="Utilisateur :").grid(row=0, column=0, sticky="e", padx=5, pady=5)
         tk.Label(self.frame_connect, text="Mot de passe :").grid(row=1, column=0, sticky="e", padx=5, pady=5)
@@ -48,25 +33,16 @@ class LogIn:
         self.entry_connect_pwd = tk.Entry(self.frame_connect, width=25, show="*")
         self.combo_user.grid(row=0, column=1, padx=5, pady=5)
         self.entry_connect_pwd.grid(row=1, column=1, padx=5, pady=5)
-        btn_connect = tk.Button(self.frame_connect, text="Connect", width=12, command=self.on_connect)
-        btn_connect.grid(row=2, column=1, columnspan=2, pady=10)
-
-    def _get_inputs(self):
-        nom = self.entry_add_nom.get().strip()
-        pwd = self.entry_add_pwd.get().strip()
-        return nom, pwd
-
-    def on_add(self):
-        nom, pwd = self._get_inputs()
-        if not nom or not pwd:
-            messagebox.showerror("Erreur", "Nom et mot de passe obligatoires.")
-            return
-        ok = self.dao.add_user(nom, pwd)
-        if ok:
-            messagebox.showinfo("OK", f"Utilisateur '{nom}' ajouté.")
-            self.entry_add_pwd.delete(0, tk.END)
-        else:
-            messagebox.showerror("Erreur", f"Le nom '{nom}' existe déjà.")
+        self.btn_switch = tk.Button(
+            self.frame_connect,
+            text="Créer un compte",
+            command=self.handle_switch,
+            bg=self.RED,
+            fg="white"
+        )
+        self.btn_switch.grid(row=2, column=0, pady=10)
+        self.btn_connect = tk.Button(self.frame_connect, text="Connect", width=12, command=self.on_connect)
+        self.btn_connect.grid(row=2, column=1, pady=10)
 
     def on_connect(self):
         nom = self.combo_user.get().strip()
@@ -86,3 +62,7 @@ class LogIn:
             self.combo_user.current(0)  # sélectionne le premier
         else:
             self.combo_user.set("")  # vide si aucun user
+
+    def handle_switch(self):
+        from exercices.tkinter.classes.Page.CreateUser import CreateUserPage
+        self.controller.show_page(CreateUserPage)

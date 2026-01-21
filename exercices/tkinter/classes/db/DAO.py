@@ -1,14 +1,23 @@
 import sqlite3
+from abc import ABCMeta, ABC, abstractmethod
 
 from exercices.tkinter.classes.db.DbConnection import DbConnection
 
+class DAO(ABC):
+    def __init__(self):
+        self.db = DbConnection()
+        self.create_table()
+
+    @abstractmethod
+    def create_table(self):
+        pass
 
 # =========================
 # DAO (accès DB)
 # =========================
-class UserDao:
-    def __init__(self, db: DbConnection):
-        self.db = db
+class UserDao(DAO):
+    def __init__(self):
+        super().__init__()
 
     def create_table(self):
         self.db.execute("""

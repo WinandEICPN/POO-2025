@@ -37,3 +37,9 @@ class UserDao:
         )
         return cur.fetchone() is not None
 
+    def get_all_usernames(self) -> list[str]:
+        cur = self.db.execute("SELECT Nom FROM TUser ORDER BY Nom")
+        liste = []
+        for row in cur.fetchall():
+            liste.append(row["Nom"])
+        return liste

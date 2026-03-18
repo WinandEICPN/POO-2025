@@ -1,0 +1,9 @@
+
+Problématique : Dans une agence IT, l'équipe de sécurité a besoin d'un outil centralisé pour suivre
+		les vulnérabilités découvertes et les affectés aux machines infectés.
+		
+Besoins : - Avoir un inventaire des machines du parc informatique
+	  - Référencer les vulnérabilités connues (CVE, type, criticité)
+	  - Affecter les vulnérabilités aux machines concernées.
+	  - suivre l'état de traitement pour chaque affectation.
+	  - Visualiser toutes les affectations et les triers par criticité, statut ou machine

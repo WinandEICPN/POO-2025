@@ -1,0 +1,20 @@
+
+Scénarios d'usage
+
+Scénario 1; 
+	Nouvelle vulnérabilité découverte :
+	L'informaticien ajoute la vulnérabilité en identifiant son CVE (CVE-xxxx-xxxx),
+	son type (réseaux), son niveau de criticité (critique), 
+	il créer la vulnérabilité dans l'onglet "Vulnérabilité"
+	il affecte la vulnérabilité à deux machines disctinctes dans l'onglet "Affectations".
+	Chaque affectation démarre en satut "En cours".
+
+Scénario 2;
+	Le patch est appliqué sur le serveur A.
+	L'informaticien sélectionne l'affectation correspondante et clique "Marquer Terminé".
+	La date de correction est enregistrée sur cette affectation uniquement.
+	Sur le serveur B, la même vulnérabilité reste "En cours".
+
+Scénario 3;
+	L'informaticien trie les affectations par criticité pour identifier les machines urgentes à traiter.
+	

@@ -1,0 +1,71 @@
+
+Cahier des charges projet POO de fin de module
+
+-	Contexte + utilisateur cible
+
+Dans une entreprise IT, il est néccéssaire de maintenir une vision claire de la sécurité des systèmes.
+Chaque machine doit avoir un suivi des ses vulnérabilités.
+le programme servira d'inventaire des machines avec leurs vulnérabilités associées.
+chaque vulnérabilité aura une priorité et un suivi pour être traitée.
+
+L'utilisateur cible du programme est un analyste sécurité chargé de relevé et de suivre les vulnérabilités
+comme un cahier de notes. 
+
+
+-Objectifs fonctionnels
+
+	Gérer les machines
+	-ajouter/modifier/supprimer une machine
+	-consulter la liste de vulnérabilité de la machine
+	
+	Gérer les vulnérabilités
+	-ajouter/modifier/supprimer une vulnérabilité
+	-consulter la liste des vulnérabilités
+
+	Associer des vulnérabilités à une machines
+	-affecter une vulnérabilité
+	-définir un statut et un niveau de criticité (en cours, terminé)
+	-enregistrer les dates de découverte et de correction
+
+	Visualiser et classer les informations
+	-afficher les vulnérabilités par machine
+	-trier les vulnérabilité par criticité ou statut
+
+
+-Périmètre
+
+	Inclus:
+	-saisie manuelle des données via l'interface graphique Tkinter
+	-gestion des machines et vulnérabilités
+	-stockage des données dans une base de donnée locale
+	-architecture orientée objet
+
+	Non-Inclus:
+	-scan automatique des machines et des vulnérabilités
+
+-Contraintes + hypothèses
+
+	Le programme sera codé en python orienté objet et utilisera une base de donnée.
+	L'interface graphique sera Tkinter
+	
+	Les données saisies manuellement par l'utilisateur seront considérée come fiables,
+	l'application sera utilisée en local par un seul utilisateur.
+	Les données saisies auront un set de valeurs autorisés ou non et des champs obligatoires.
+
+-Critères de réussite + mini plan de test
+
+	L'utilisateur pourra utiliser les fonctions décrites ci dessus.
+
+	TEST:
+	-ajout d'une machine
+		ajouter une machine avec des entrées valide
+		résultat : la machine apparait dans la liste et est sauvegardé dans la base de donnée.
+
+	-affectation d'une vulnérabilité
+		associer une vulnérabilité à une machine
+		résulat : l'affectation est visible avec le statut adéquat.
+
+	-modification du statut
+		passer le statut de vulnérabilité de "en cours" à "terminé"
+		résultat : le statut et la date sont mis à jour.
+	

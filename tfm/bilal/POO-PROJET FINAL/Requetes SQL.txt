@@ -1,0 +1,27 @@
+CREATE TABLE Cryptos(
+   id_crypto INTEGER,
+   Nom_crypto TEXT,
+   symbole TEXT,
+   Prix_unitaire_usdt NUMERIC(15,2)  ,
+   quantité_stock NUMERIC(15,2)  ,
+   PRIMARY KEY(id_crypto)
+);
+
+CREATE TABLE Transactions(
+   Id_Transactions INTEGER,
+   quantite_echange NUMERIC(15,2)  ,
+   montal_total_usdt NUMERIC(15,2)  ,
+   date_heure NUMERIC,
+   id_crypto INTEGER NOT NULL,
+   PRIMARY KEY(Id_Transactions),
+   FOREIGN KEY(id_crypto) REFERENCES Cryptos(id_crypto)
+);
+
+CREATE TABLE Restock(
+   id_ravitaillement INTEGER,
+   quantite_ajoutee TEXT,
+   date_raviraillement NUMERIC,
+   id_crypto INTEGER NOT NULL,
+   PRIMARY KEY(id_ravitaillement),
+   FOREIGN KEY(id_crypto) REFERENCES Cryptos(id_crypto)
+);
